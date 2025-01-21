@@ -1,5 +1,5 @@
+//const BASE_URL = 'https://ecommerce-api-egxx.onrender.com/api'; // Replace with your actual API base URL
 const BASE_URL = 'http://localhost:5050/api'; // Replace with your actual API base URL
-
 // Fetch all products
 export const getProducts = async () => {
   try {

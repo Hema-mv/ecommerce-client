@@ -11,19 +11,19 @@ import NavBar from './Components/NavBar';
 import './Styles/app.css';
 
 const App = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({ id: null, name: '' ,email:''});
   return (
     <>
-       {user ? (
+       {user.id ? (
           <>
     <div>
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/product" element={<ProductPage />} />
+        <Route path="/" element={<HomePage user={user}/>} />
+        <Route path="/product/:id" element={<ProductPage user={user}/>} />
+        <Route path="/cart" element={<CartPage user={user}/>} />
+        <Route path="/checkout" element={<CheckoutPage user={user}/>} />
+        <Route path="/product" element={<ProductPage user={user}/>} />
         <Route path="/productlist" element={<ProductDetailsPage />} />
       </Routes>
     </div>

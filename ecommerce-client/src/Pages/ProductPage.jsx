@@ -64,7 +64,8 @@ const ProductPage = () => {
         await updateExistingProduct(id, formData);
         alert("Product updated successfully");
       } else {
-        await createNewProduct(formData);
+        const newProduct =await createNewProduct(formData);
+        navigate(`/product/${newProduct._id}`); 
         alert("Product created successfully");
       }
       navigate("/products");
@@ -167,10 +168,10 @@ const ProductPage = () => {
           <button type="button" onClick={() => handleDelete(id)}>
             Delete Product
           </button>
-        )}
+        )} {/* 
          <h2>Product List</h2>
       <Link to="/product">Add New Product</Link>
-      <ul>
+     <ul>
         {products.map((product) => (
           <li key={product._id}>
             {product.name} - {product.price}
@@ -183,7 +184,7 @@ const ProductPage = () => {
             </button>
           </li>
         ))}
-      </ul>
+      </ul> */}
       </form>
 
      

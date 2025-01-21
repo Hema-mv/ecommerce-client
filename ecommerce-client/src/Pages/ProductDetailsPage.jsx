@@ -7,7 +7,7 @@ import {
   fetchAllProducts,
   deleteProductById,
 } from "../Utilities/product-Service";
-import "../Styles/product.css";
+import "../Styles/productlist.css";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -26,10 +26,20 @@ const ProductDetailsPage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+ 
+     
     if (isEditMode) {
       fetchProduct();
     }
     fetchProducts();
+    const rootElement = document.getElementById('root'); if (rootElement) 
+    { rootElement.style.height = '100%'; 
+      rootElement.style.margin = '0'; 
+      rootElement.style.display = 'block'; 
+      rootElement.style.flexDirection = 'column'; 
+      rootElement.style.backgroundColor = '#f4f4f4'; 
+  
+   } 
   }, [id]);
 
   const fetchProduct = async () => {
@@ -67,7 +77,7 @@ const ProductDetailsPage = () => {
         await createNewProduct(formData);
         alert("Product created successfully");
       }
-      navigate("/products");
+      navigate("/productlist");
     } catch (error) {
       console.error("Error saving product:", error);
       alert("Failed to save product");
@@ -83,10 +93,11 @@ const ProductDetailsPage = () => {
       console.error("Error deleting product:", error);
       alert("Failed to delete product");
     }
+    navigate("/productlist");
   };
 
   return (
-    <div className="productpage">
+    <div className="productlistpage">
       <h1>{isEditMode ? "Edit Product" : "Create New Product"}</h1>
       <form >
         
@@ -100,14 +111,22 @@ const ProductDetailsPage = () => {
       <ul>
         {products.map((product) => (
           <li key={product._id}>
+               <img src={product.image} alt={product.name} width="100" height="100" />
             {product.name} - {product.price}
-            <Link to={`/product/${product._id}`}>Edit</Link>
-            <button
-              className="btn btn-danger"
-              onClick={() => handleDelete(product._id)}
-            >
-              Delete
-            </button>
+            <div className="btn-container">
+          <button
+            className="btn"
+            onClick={() => navigate(`/product/${product._id}`)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn-danger"
+            onClick={() => handleDelete(product._id)}
+          >
+            Delete
+          </button>
+        </div>
           </li>
         ))}
       </ul>

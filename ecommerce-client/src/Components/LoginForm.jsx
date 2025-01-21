@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState ,useContext} from "react";
 //import { userService } from "./users-services";
 import { login } from "../utilities/users-service";
+import { useNavigate } from "react-router-dom";
+//import { UserContext } from "../Utilities/userContext";
 
 function LoginForm(props) {
 
@@ -9,6 +11,10 @@ function LoginForm(props) {
     password:""
   })
   const [error, setError] = useState("");
+  //const { setUser } = useContext(UserContext);
+  //const { setUser } = useContext(null);
+  const navigate = useNavigate();
+
   function handleChange (e){
     setFormData({...formData,[e.target.name]:e.target.value})
   }
@@ -20,10 +26,13 @@ function LoginForm(props) {
       // The promise returned by the login service method will resolve to the user
       // object included int he payload of the JWT
       const user=await login(credentials);
-      console.log('credentials',user)
-      props.setUser(user);
-      console.log('navigate',user)
-      navigate("/products");
+      
+      props.setUser({ id: user._id, name: user.name, email: user.email });
+      console.log('credentials',user._id,user.name);
+    //setUser({ id: user._id, name: user.name });
+    // console.log('userss',user);
+    navigate("/"); 
+    
       //  const submitData={...formData};
       //   console.log(submitData);
       //   const user=await login(submitData);
@@ -31,7 +40,8 @@ function LoginForm(props) {
       //   props.setUser(user);   
     }
     catch(err){
-      setError("Login failed - try again");
+      console.log(err)
+      setError("Loging failed");
     }
   }
   return(

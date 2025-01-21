@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { fetchAllProducts } from '../Utilities/product-Service';
 import '../Styles/page.css';
+import { addToCart } from '../utilities/cart-service';
+//import { UserContext } from "../Utilities/UserContext";
 
 const defaultImage = 'https://via.placeholder.com/150'; // Default image URL
 
-const HomePage = () => {
+const HomePage = ({ user }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [quantities, setQuantities] = useState({});
+  const [error, setError] = useState('');
   const options = Array.from({ length: 10 }, (_, i) => i + 1);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ const HomePage = () => {
         rootElement.style.backgroundColor = '#f4f4f4'; 
     
      } 
-  }, []);
+  }, [user]);
  
   const fetchProducts = async () => {
     try {
@@ -41,24 +44,29 @@ const HomePage = () => {
     });
   };
 
-  const handleAddToCart = (product) => {
-    const quantity = quantities[product._id] || 1;
-    const existingItemIndex = cart.findIndex(item => item._id === product._id);
-    let updatedCart;
-
-    if (existingItemIndex !== -1) {
-      updatedCart = [...cart];
-      updatedCart[existingItemIndex].quantity += quantity;
-    } else {
-      updatedCart = [...cart, { ...product, quantity }];
+  const handleAddToCart = async (product) => {
+    if (!user) {
+      setError("You must be logged in to add items to the cart.");
+      return;
     }
-    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-    console.log('updatedCart', updatedCart);
-    console.log(`Added ${product.name} to cart with quantity ${quantity}`);
+    const quantity = quantities[product._id] || 1;
+    const cartItem = { productId: product._id, quantity, userId: user.id };
+
+    try {
+      // Send the updated cart item to the backend
+      const updatedCart = await addToCart(user.id, cartItem);
+      setCart(updatedCart.items);
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart.items));
+      console.log(`Added ${product.name} to cart with quantity ${quantity}`);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      setError('Failed to add item to cart.');
+    }
   };
 
   return (
     <div className="homepage">
+       {<h1>Welcome, {user.name}!</h1> }
       <h1 className="homepagetitle">New line Clothing</h1><br/>
       <ul className="homepagelist">
         {products.map((product) => (

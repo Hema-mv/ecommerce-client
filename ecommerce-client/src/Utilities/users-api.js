@@ -2,6 +2,7 @@
 
 // TODO: we are using fetch here and can update to axios later
 // ** set up the base url for the route
+//const LOCAL_URL = "https://ecommerce-api-egxx.onrender.com";
 const LOCAL_URL = "http://localhost:5050";
 const API_URL = "/api/users";
 const URL = LOCAL_URL + API_URL;
