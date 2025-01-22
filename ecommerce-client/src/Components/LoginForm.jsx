@@ -11,8 +11,7 @@ function LoginForm(props) {
     password:""
   })
   const [error, setError] = useState("");
-  //const { setUser } = useContext(UserContext);
-  //const { setUser } = useContext(null);
+ 
   const navigate = useNavigate();
 
   function handleChange (e){
@@ -29,15 +28,9 @@ function LoginForm(props) {
       
       props.setUser({ id: user._id, name: user.name, email: user.email });
       console.log('credentials',user._id,user.name);
-    //setUser({ id: user._id, name: user.name });
-    // console.log('userss',user);
-    navigate("/"); 
     
-      //  const submitData={...formData};
-      //   console.log(submitData);
-      //   const user=await login(submitData);
-      //   console.log(user);
-      //   props.setUser(user);   
+    navigate("/"); 
+     
     }
     catch(err){
       console.log(err)

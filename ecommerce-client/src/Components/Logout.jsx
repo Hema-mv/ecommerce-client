@@ -11,6 +11,12 @@ const LogoutButton = ({ setUser }) => {
     // Clear user data from local storage
     localStorage.removeItem('user');
 
+
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.style.background = '';
+      rootElement.style.backgroundSize = '';
+    }
     // Redirect to login page
     navigate('/login');
   };

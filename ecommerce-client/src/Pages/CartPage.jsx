@@ -10,6 +10,13 @@ const CartPage = ({ user }) => {
   const navigate = useNavigate();
   useEffect(() => {
     fetchCartItems();
+
+    const rootElement = document.getElementById('root'); 
+    if (rootElement) { 
+      rootElement.style.background = "none";
+      rootElement.style.backgroundSize = "cover";
+    } 
+
   }, [user]);
 
   const fetchCartItemsusingLocalStorage = async () => {
@@ -53,7 +60,7 @@ const CartPage = ({ user }) => {
 
   // };
   const handleQuantityChange = (productId, quantity) => {
-    alert(quantity)
+   
     const updatedCartItems = cartItems.map((item) =>
       item.productId._id === productId ? { ...item, quantity } : item
     );
@@ -61,9 +68,9 @@ const CartPage = ({ user }) => {
     updateCartItemQuantity(user.id, productId, quantity);
   };
   const handleRemoveItem = async(index) => {
-    alert(cartId)
+    
     const itemId = cartItems[index]._id;
-    alert(itemId)
+    
     const newCartItems = cartItems.filter((_, i) => i !== index);
     setCartItems(newCartItems);
     localStorage.setItem('cartItems', JSON.stringify(newCartItems));

@@ -66,10 +66,10 @@ const ProductPage = () => {
         alert("Product updated successfully");
       } else {
         const newProduct =await createNewProduct(formData);
-        navigate(`/product/${newProduct._id}`); 
+     
         alert("Product created successfully");
       }
-      navigate("/products");
+      navigate('/productlist'); 
     } catch (error) {
       console.error("Error saving product:", error);
       alert("Failed to save product");
@@ -81,6 +81,7 @@ const ProductPage = () => {
       await deleteProductById(productId);
       alert("Product deleted successfully");
       setProducts(products.filter((product) => product._id !== productId));
+      navigate('/productlist'); 
     } catch (error) {
       console.error("Error deleting product:", error);
       alert("Failed to delete product");

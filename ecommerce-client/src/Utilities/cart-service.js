@@ -77,9 +77,29 @@ export async function fetchCart(userId) {
     }
     return await response.json();
   }
-  export const updateCartStatus = async (userId, status) => {
+  // export const updateCartStatus = async (userId, status) => {
+  //   try {
+  //     const response = await fetch(`${BASE_URL}/cart/${userId}/status`, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ status }),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error('Error updating cart status');
+  //     }
+  //     const data = await response.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.error('Error updating cart status:', error);
+  //     throw error;
+  //   }
+  // };
+
+  export const updateCartStatus = async (cartId, status) => {
     try {
-      const response = await fetch(`${BASE_URL}/cart/${userId}/status`, {
+      const response = await fetch(`${BASE_URL}/cart/${cartId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -96,6 +116,7 @@ export async function fetchCart(userId) {
       throw error;
     }
   };
+
   export async function removeCartItem(cartId, itemId) {
     const response = await fetch(`${BASE_URL}/cart/${cartId}/item/${itemId}`, {
       method: 'DELETE',

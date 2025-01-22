@@ -11,7 +11,8 @@ const CheckoutPage = ({ user }) => {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [orderSubmitted, setOrderSubmitted] = useState(false);
-  
+  const [cartId, setCartId] = useState(null); 
+
   useEffect(() => {
     if (user && user.id) {
       fetchCartItems();
@@ -22,6 +23,7 @@ const CheckoutPage = ({ user }) => {
     try {
       const cartData = await fetchCart(user.id);
       setCartItems(cartData.items);
+      setCartId(cartData._id);
       calculateTotal(cartData.items);
     } catch (error) {
       console.error('Error fetching cart items:', error);
@@ -37,7 +39,7 @@ const CheckoutPage = ({ user }) => {
     e.preventDefault();
     try {
       // Update cart status to completed
-      await updateCartStatus(user.id, 'completed');
+      await updateCartStatus(cartId, 'completed');
       setOrderSubmitted(true);
       console.log('Order submitted:', formData);
       setFormData({
