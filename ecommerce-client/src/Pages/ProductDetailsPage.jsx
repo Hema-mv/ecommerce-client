@@ -10,9 +10,11 @@ import {
 import "../Styles/productlist.css";
 
 const ProductDetailsPage = () => {
-  const { id } = useParams();
+  //const { id } = useParams();
   const navigate = useNavigate();
-  const isEditMode = Boolean(id);
+  //const isEditMode = Boolean(id);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [id, setId] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -83,7 +85,19 @@ const ProductDetailsPage = () => {
       alert("Failed to save product");
     }
   };
-
+  const handleEdit = async (productId) => {
+    try {
+      alert(productId);
+      const productData = await fetchProductById(productId);
+      setFormData(productData);
+      setIsEditMode(true);
+      setId(productId);
+      navigate('/product'); // Navigate to the product form for editing
+    } catch (error) {
+      console.error('Error fetching product details:', error);
+      alert('Failed to fetch product details');
+    }
+  };
   const handleDelete = async (productId) => {
     try {
       await deleteProductById(productId);
@@ -113,20 +127,16 @@ const ProductDetailsPage = () => {
           <li key={product._id}>
                <img src={product.image} alt={product.name} width="100" height="100" />
             {product.name} - {product.price}
-            <div className="btn-container">
-          <button
-            className="btn"
-            onClick={() => navigate(`/product/${product._id}`)}
-          >
-            Edit
-          </button>
-          <button
-            className="btn-danger"
-            onClick={() => handleDelete(product._id)}
-          >
-            Delete
-          </button>
-        </div>
+            <Link to={`/product/${product._id}`}>Edit</Link>
+            <Link to={`/product/${product._id}`}>Delete</Link>
+            {/* <div className="btn-container">
+              <button className="btn" onClick={() => navigate(`/product/${product._id}`)}>
+                Edit
+              </button>
+              <button className="btn-danger" onClick={() => handleDelete(product._id)}>
+                Delete
+              </button>
+            </div> */}
           </li>
         ))}
       </ul>

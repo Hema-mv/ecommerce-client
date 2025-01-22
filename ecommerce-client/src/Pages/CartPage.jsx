@@ -29,32 +29,41 @@ const CartPage = ({ user }) => {
   };
   const fetchCartItems = async () => {
     try {
-      console.log('fetchCartItems', user);
+     
       const cart = await fetchCart(user.id);
       setCartItems(cart.items);
-      console.log("fetchcart2",cart.items)
       setCartId(cart._id);
     } catch (error) {
       console.error('Error fetching cart items:', error);
     }
   };
 
-  const handleQuantityChange = async (index, newQuantity) =>{
-    const newCartItems = [...cartItems];
-    newCartItems[index].quantity = newQuantity;
-    setCartItems(newCartItems);
-    localStorage.setItem('cartItems', JSON.stringify(newCartItems));
+  // const handleQuantityChange = async (index, newQuantity) =>{
+  //   alert("handleQuantityChange",index)
+  //   const newCartItems = [...cartItems];
+  //   newCartItems[index].quantity = newQuantity;
+  //   setCartItems(newCartItems);
+  //   localStorage.setItem('cartItems', JSON.stringify(newCartItems));
 
-    try {
-      await updateCart(cartId, { items: newCartItems });
-    } catch (error) {
-      console.error('Error updating cart:', error);
-    }
+  //   try {
+  //     await updateCart(cartId, { items: newCartItems });
+  //   } catch (error) {
+  //     console.error('Error updating cart:', error);
+  //   }
 
+  // };
+  const handleQuantityChange = (productId, quantity) => {
+    alert(quantity)
+    const updatedCartItems = cartItems.map((item) =>
+      item.productId._id === productId ? { ...item, quantity } : item
+    );
+    setCartItems(updatedCartItems);
+    updateCartItemQuantity(user.id, productId, quantity);
   };
-
   const handleRemoveItem = async(index) => {
+    alert(cartId)
     const itemId = cartItems[index]._id;
+    alert(itemId)
     const newCartItems = cartItems.filter((_, i) => i !== index);
     setCartItems(newCartItems);
     localStorage.setItem('cartItems', JSON.stringify(newCartItems));
@@ -66,7 +75,7 @@ const CartPage = ({ user }) => {
   };
 
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    return cartItems.reduce((total, item) => total + item.productId.price * item.quantity, 0).toFixed(2);
   };
   const handleCheckout = () => {
     console.log('Proceeding to checkout with items:', cartItems);

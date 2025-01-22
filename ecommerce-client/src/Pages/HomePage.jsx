@@ -24,7 +24,6 @@ const HomePage = ({ user }) => {
         rootElement.style.display = 'block'; 
         rootElement.style.flexDirection = 'column'; 
         rootElement.style.backgroundColor = '#f4f4f4'; 
-    
      } 
   }, [user]);
  

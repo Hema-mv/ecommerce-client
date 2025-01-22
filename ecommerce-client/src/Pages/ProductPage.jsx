@@ -34,7 +34,8 @@ const ProductPage = () => {
 
   const fetchProduct = async () => {
     try {
-      console.log(id);
+     
+
       const productData = await fetchProductById(id);
       setFormData(productData);
     } catch (error) {

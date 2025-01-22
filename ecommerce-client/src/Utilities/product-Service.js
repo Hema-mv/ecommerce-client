@@ -15,6 +15,7 @@ export const fetchAllProducts = async () => {
 // Fetch product by ID
 export const fetchProductById = async (id) => {
   try {
+
     const product = await getProductById(id);
     return product;
   } catch (error) {
