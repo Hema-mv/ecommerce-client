@@ -22,12 +22,8 @@ Install dependencies:
 Running the Application
 To start the development server:
 
-To build the application for production:
-
-To preview the production build:
-
-Linting
-To lint the code:
+To build the application
+npm run dev
 
 Project Features
 Authentication: Users can sign up, log in, and log out.
