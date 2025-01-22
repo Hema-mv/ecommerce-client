@@ -5,12 +5,12 @@ This is an ecommerce client application built with React and Vite. It provides a
 
 ## Getting Started
 
-### Prerequisites
+## Prerequisites
 
 - Node.js (v14 or higher)
 - npm (v6 or higher)
 
-### Installation
+## Installation
 
 1. Clone the repository:
 ```sh
@@ -18,6 +18,7 @@ git clone https://github.com/hema-mv/ecommerce-client.git
 cd ecommerce-client
 
 2. Install dependencies:
+    npm install
 
 Running the Application
     npm run dev
@@ -28,12 +29,16 @@ To start the development server:
 To build the application for production:
     npm run build
 
-project Features
+## project Features
 Authentication: Users can sign up, log in, and log out.
+
 Product Management: Users can view, create, update, and delete products.
+
 Cart Management: Users can add products to the cart, update quantities, and remove items.
+
 Checkout: Users can proceed to checkout and submit their orders.
-File Descriptions
+
+## File Descriptions
 src/App.jsx: Main application component that sets up routes and handles user authentication state.
 src/Components: Contains reusable components like NavBar, LoginForm, SignupForm, and Logout.
 src/Pages: Contains page components like AuthPage, HomePage, CartPage, CheckoutPage, ProductPage, and ProductDetailsPage.
@@ -42,10 +47,10 @@ src/Utilities: Contains utility functions and services for API calls and user co
 API Integration
 The application integrates with a backend API for user authentication, product management, and cart management. The API base URL is configured in the utility files.
 
-API Routes
+## API Routes
 Here are the main API routes used in the application:
 
-Authentication:
+## Authentication:
 
 POST /api/auth/signup: Create a new user account.
 POST /api/auth/login: Log in an existing user.
