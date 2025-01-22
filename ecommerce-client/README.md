@@ -22,17 +22,17 @@ Install dependencies:
 Running the Application
 To start the development server:
 
-To build the application
+2. To build the application
 npm run dev
 
-Project Features
+3. Project Features
 Authentication: Users can sign up, log in, and log out.
 Product Management: Users can view, create, update, and delete products.
 Cart Management: Users can add products to the cart,  quantities, and remove items.
 Checkout: Users can proceed to checkout and submit their orders.
 
 
-File Descriptions
+4. File Descriptions
 src/App.jsx: Main application component that sets up routes and handles user authentication state.
 src/Components: Contains reusable components like NavBar, LoginForm, SignupForm, and Logout.
 src/Pages: Contains page components like AuthPage, HomePage, CartPage, CheckoutPage, ProductPage, and ProductDetailsPage.
