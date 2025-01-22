@@ -18,7 +18,7 @@ This is an ecommerce client application built with React and Vite. It provides a
 git clone https://github.com/hema-mv/ecommerce-client.git
 cd ecommerce-client
 
-Install dependencies:
+2. Install dependencies:
 
 Running the Application
     npm run dev
