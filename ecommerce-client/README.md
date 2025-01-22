@@ -1,6 +1,6 @@
 # Ecommerce Client
 
-This is an ecommerce client application built with React and Vite. It provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is an ecommerce client application built with React and Vite. It provides a minimal setup to get React working in Vite 
 
 
 ## Getting Started
@@ -13,7 +13,6 @@ This is an ecommerce client application built with React and Vite. It provides a
 ### Installation
 
 1. Clone the repository:
-
 ```sh
 git clone https://github.com/hema-mv/ecommerce-client.git
 cd ecommerce-client
@@ -29,7 +28,7 @@ To start the development server:
 To build the application for production:
     npm run build
 
-roject Features
+project Features
 Authentication: Users can sign up, log in, and log out.
 Product Management: Users can view, create, update, and delete products.
 Cart Management: Users can add products to the cart, update quantities, and remove items.
